@@ -5,9 +5,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.constant.Constant;
+import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
+import com.emreozgenc.spacesurfer.objects.MainBullet;
 import com.emreozgenc.spacesurfer.objects.MainShip;
+
+import sun.applet.Main;
 
 public class GameScreen implements Screen {
     // Access main game class
@@ -22,10 +27,12 @@ public class GameScreen implements Screen {
     // Main ship
     private MainShip mainShip;
 
+
     // Screen constructor
     public GameScreen(SpaceSurfer game) {
         this.game = game;
         batch = new SpriteBatch();
+        Gdx.graphics.setVSync(true);
 
         background = new Texture(Gdx.files.internal("game-sprites/background.png"));
         mainShip = new MainShip((float)(SpaceSurfer.WIDTH / 2 - Constant.MAIN_SHIP_WIDTH /2),
@@ -38,11 +45,31 @@ public class GameScreen implements Screen {
     }
 
     private void update(float delta) {
+
         mainShip.update(delta);
+
+        // Bullets update
+        for(MainBullet bullet : ObjectArrays.mainBullets) {
+            bullet.update(delta);
+        }
+    }
+
+    private void render2(SpriteBatch batch) {
+        batch.draw(background, 0, 0, SpaceSurfer.WIDTH, SpaceSurfer.HEIGHT);
+
+        for(MainBullet bullet : ObjectArrays.mainBullets) {
+            bullet.render(batch);
+        }
+
+        mainShip.render(batch);
     }
 
     private void remove(float delta) {
 
+        for(MainBullet bullet : ObjectArrays.RmainBullets) {
+            ObjectArrays.mainBullets.removeValue(bullet, true);
+        }
+        ObjectArrays.RmainBullets.clear();
     }
 
     @Override
@@ -57,8 +84,7 @@ public class GameScreen implements Screen {
         game.cam.update();
 
         batch.begin();
-        batch.draw(background, 0, 0, SpaceSurfer.WIDTH, SpaceSurfer.HEIGHT);
-        mainShip.render(batch);
+        render2(batch);
         batch.end();
 
         //After draw if we need remove something in scene

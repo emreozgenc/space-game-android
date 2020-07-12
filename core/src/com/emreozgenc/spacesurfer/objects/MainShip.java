@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.constant.Constant;
+import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
 
 import javax.xml.soap.Text;
 
@@ -22,9 +23,16 @@ public class MainShip {
     private Animation<TextureRegion> right1;
     private Animation<TextureRegion> right2;
 
+    // Animation timers
     private float stateTimer;
     private float changeTimer;
     private int state;
+
+    // Bullet texture
+    private Texture bulletTexture;
+
+    private Animation<TextureRegion> bulletAnim;
+    private float fireTimer;
 
     public MainShip(float posX, float posY) {
         this.posX = posX;
@@ -32,9 +40,11 @@ public class MainShip {
         stateTimer = 0;
         changeTimer = 0;
         state = 0;
+        fireTimer = 0;
         shipTexture = new Texture(Gdx.files.internal("game-sprites/mainship.png"));
+        bulletTexture = new Texture((Gdx.files.internal("game-sprites/bullets.png")));
 
-        //Animation initialize
+        // Ship animation initialize
 
         TextureRegion[][] tmp = TextureRegion.split(shipTexture,
                 Constant.MAIN_SHIP_TILE_WIDTH,
@@ -46,6 +56,13 @@ public class MainShip {
         right1 = new Animation<TextureRegion>(Constant.MAIN_SHIP_FRAME_TIME, tmp[3]);
         right2 = new Animation<TextureRegion>(Constant.MAIN_SHIP_FRAME_TIME, tmp[4]);
 
+        // Bullet animation initialize
+
+        TextureRegion[][] tmp2 = TextureRegion.split(bulletTexture,
+                Constant.MAIN_BULLET_TILE_WIDTH,
+                Constant.MAIN_BULLET_TILE_HEIGTH);
+        bulletAnim = new Animation<TextureRegion>(Constant.MAIN_BULLET_FRAME_TIME, tmp2[1]);
+
     }
 
     public void render(SpriteBatch batch) {
@@ -55,6 +72,7 @@ public class MainShip {
     public void update(float delta) {
         handleMovement(delta);
         handleAnimation(delta);
+        fire(delta);
     }
 
     private void handleMovement(float delta) {
@@ -112,6 +130,8 @@ public class MainShip {
                 if(state == 2)
                     renderTexture = right2.getKeyFrame(stateTimer, true);
             }
+            if (state == 0)
+                renderTexture = idle.getKeyFrame(stateTimer, true);
         }
         else {
             changeTimer += delta;
@@ -142,6 +162,18 @@ public class MainShip {
                 renderTexture = right2.getKeyFrame(stateTimer, true);
             else if(state == 0)
                 renderTexture = idle.getKeyFrame(stateTimer, true);
+        }
+    }
+
+    private void fire(float delta) {
+        fireTimer += delta;
+        if(Math.abs(fireTimer) > Constant.MAIN_SHIP_FIRE_RATE) {
+            ObjectArrays.mainBullets.add(new MainBullet(
+                    posX + Constant.MAIN_BULLET_WIDTH / 2,
+                    posY,
+                    bulletAnim
+            ));
+            fireTimer = 0;
         }
     }
 }
