@@ -21,4 +21,19 @@ public final class Constant {
     public static final int MAIN_BULLET_WIDTH = 32;
     public static final int MAIN_BULLET_HEIGHT = 32;
     public static final int MAIN_BULLET_SPEED = 750;
+
+    // Cloud manager constants
+    public static float CLOUD_MANAGER_SPAWN_MAX_TIME = 15f;
+    public static float CLOUD_MANAGER_SPAWN_MIN_TIME = 7.5f;
+    public static int CLOUD_MANAGER_CLOUD_COUNT = 2;
+
+    // Cloud constants
+    public static int CLOUD_SPEED_MAX = 200;
+    public static int CLOUD_SPEED_MIN = 100;
+    public static int CLOUD_WIDTH = 450;
+    public static int CLOUD_HEIGTH = 220;
+    public static int CLOUD_POS_Y = SpaceSurfer.HEIGHT + CLOUD_HEIGTH + 20;
+    public static int CLOUD_POS_X = 0;
+    public static int CLOUD_MIN_POS_Y = -300;
+
 }

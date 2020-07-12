@@ -5,14 +5,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.constant.Constant;
+import com.emreozgenc.spacesurfer.managers.CloudManager;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
+import com.emreozgenc.spacesurfer.objects.Cloud;
 import com.emreozgenc.spacesurfer.objects.MainBullet;
 import com.emreozgenc.spacesurfer.objects.MainShip;
 
-import sun.applet.Main;
 
 public class GameScreen implements Screen {
     // Access main game class
@@ -27,6 +27,9 @@ public class GameScreen implements Screen {
     // Main ship
     private MainShip mainShip;
 
+    // Cloud manager
+    private CloudManager cloudManager;
+
 
     // Screen constructor
     public GameScreen(SpaceSurfer game) {
@@ -37,6 +40,7 @@ public class GameScreen implements Screen {
         background = new Texture(Gdx.files.internal("game-sprites/background.png"));
         mainShip = new MainShip((float)(SpaceSurfer.WIDTH / 2 - Constant.MAIN_SHIP_WIDTH /2),
                 20);
+        cloudManager = new CloudManager();
     }
 
     @Override
@@ -47,15 +51,25 @@ public class GameScreen implements Screen {
     private void update(float delta) {
 
         mainShip.update(delta);
+        cloudManager.update(delta);
 
         // Bullets update
         for(MainBullet bullet : ObjectArrays.mainBullets) {
             bullet.update(delta);
         }
+
+        // Clouds update
+        for(Cloud cloud : ObjectArrays.clouds) {
+            cloud.update(delta);
+        }
     }
 
     private void render2(SpriteBatch batch) {
         batch.draw(background, 0, 0, SpaceSurfer.WIDTH, SpaceSurfer.HEIGHT);
+
+        for(Cloud cloud : ObjectArrays.clouds) {
+            cloud.render(batch);
+        }
 
         for(MainBullet bullet : ObjectArrays.mainBullets) {
             bullet.render(batch);
@@ -70,6 +84,11 @@ public class GameScreen implements Screen {
             ObjectArrays.mainBullets.removeValue(bullet, true);
         }
         ObjectArrays.RmainBullets.clear();
+
+        for(Cloud cloud : ObjectArrays.Rclouds) {
+            ObjectArrays.clouds.removeValue(cloud, true);
+        }
+        ObjectArrays.Rclouds.clear();
     }
 
     @Override
