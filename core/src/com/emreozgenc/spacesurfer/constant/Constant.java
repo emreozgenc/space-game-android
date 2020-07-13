@@ -61,4 +61,11 @@ public final class Constant {
     public static final int ENEMY_BULLET_TILE_HEIGHT = 16;
     public static final float ENEMY_BULLET_FRAME_TIME = 0.1f;
 
+    //Explosion constants
+    public static final int EXPLOSION_TILE_WIDTH = 16;
+    public static final int EXPLOSION_TILE_HEIGHT = 16;
+    public static final int EXPLOSION_HEIGHT = 64;
+    public static final int EXPLOSION_WIDTH = 64;
+    public static final float EXPLOSION_FRAME_TIME = 0.1f;
+
 }

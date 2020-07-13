@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.emreozgenc.spacesurfer.collisions.CollisionRectangle;
 import com.emreozgenc.spacesurfer.constant.Constant;
+import com.emreozgenc.spacesurfer.managers.ExplosionManager;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
 
 import java.util.Random;
@@ -60,6 +61,7 @@ public class Enemy {
             for(MainBullet bullet : ObjectArrays.mainBullets) {
                 if(bullet.getCollision().isCollide(col)) {
                     ObjectArrays.Renemies.add(this);
+                    ExplosionManager.createExplosion(posX, posY);
                 }
             }
         }

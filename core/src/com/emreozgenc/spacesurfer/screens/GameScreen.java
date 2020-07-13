@@ -9,10 +9,12 @@ import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.managers.CloudManager;
 import com.emreozgenc.spacesurfer.managers.EnemyManager;
+import com.emreozgenc.spacesurfer.managers.ExplosionManager;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
 import com.emreozgenc.spacesurfer.objects.Cloud;
 import com.emreozgenc.spacesurfer.objects.Enemy;
 import com.emreozgenc.spacesurfer.objects.EnemyBullet;
+import com.emreozgenc.spacesurfer.objects.Explosion;
 import com.emreozgenc.spacesurfer.objects.MainBullet;
 import com.emreozgenc.spacesurfer.objects.MainShip;
 
@@ -36,6 +38,9 @@ public class GameScreen implements Screen {
     // Enemy manager
     private EnemyManager enemyManager;
 
+    // Explosion manager
+    private ExplosionManager explosionManager;
+
 
     // Screen constructor
     public GameScreen(SpaceSurfer game) {
@@ -48,6 +53,7 @@ public class GameScreen implements Screen {
                 20);
         cloudManager = new CloudManager();
         enemyManager = new EnemyManager();
+        explosionManager = new ExplosionManager();
     }
 
     @Override
@@ -80,6 +86,11 @@ public class GameScreen implements Screen {
         for(EnemyBullet bullet : ObjectArrays.enemyBullets) {
             bullet.update(delta);
         }
+
+        // Explosions update
+        for(Explosion explosion : ObjectArrays.explosions) {
+            explosion.update(delta);
+        }
     }
 
     private void render2(SpriteBatch batch) {
@@ -99,6 +110,10 @@ public class GameScreen implements Screen {
 
         for(Enemy enemy : ObjectArrays.enemies) {
             enemy.render(batch);
+        }
+
+        for(Explosion explosion : ObjectArrays.explosions) {
+            explosion.render(batch);
         }
 
         mainShip.render(batch);
@@ -125,6 +140,11 @@ public class GameScreen implements Screen {
             ObjectArrays.enemyBullets.removeValue(bullet, true);
         }
         ObjectArrays.RenemyBullets.clear();
+
+        for(Explosion explosion : ObjectArrays.Rexplosions) {
+            ObjectArrays.explosions.removeValue(explosion, true);
+        }
+        ObjectArrays.Rexplosions.clear();
     }
 
     @Override
