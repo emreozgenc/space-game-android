@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.managers.CloudManager;
@@ -17,6 +21,7 @@ import com.emreozgenc.spacesurfer.objects.EnemyBullet;
 import com.emreozgenc.spacesurfer.objects.Explosion;
 import com.emreozgenc.spacesurfer.objects.MainBullet;
 import com.emreozgenc.spacesurfer.objects.MainShip;
+import com.emreozgenc.spacesurfer.objects.ScoreText;
 
 
 public class GameScreen implements Screen {
@@ -41,19 +46,23 @@ public class GameScreen implements Screen {
     // Explosion manager
     private ExplosionManager explosionManager;
 
+    // Player score
+    public static int score;
+    private ScoreText scoreText;
 
     // Screen constructor
     public GameScreen(SpaceSurfer game) {
         this.game = game;
         batch = new SpriteBatch();
         Gdx.graphics.setVSync(true);
-
         background = new Texture(Gdx.files.internal("game-sprites/background.png"));
         mainShip = new MainShip((float)(SpaceSurfer.WIDTH / 2 - Constant.MAIN_SHIP_WIDTH /2),
                 20);
         cloudManager = new CloudManager();
         enemyManager = new EnemyManager();
         explosionManager = new ExplosionManager();
+        scoreText = new ScoreText();
+        score = 0;
     }
 
     @Override
@@ -66,6 +75,7 @@ public class GameScreen implements Screen {
         mainShip.update(delta);
         cloudManager.update(delta);
         enemyManager.update(delta);
+        scoreText.update();
 
         // Main bullets update
         for(MainBullet bullet : ObjectArrays.mainBullets) {
@@ -115,8 +125,8 @@ public class GameScreen implements Screen {
         for(Explosion explosion : ObjectArrays.explosions) {
             explosion.render(batch);
         }
-
         mainShip.render(batch);
+        scoreText.render(batch);
     }
 
     private void remove(float delta) {

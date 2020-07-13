@@ -7,6 +7,7 @@ import com.emreozgenc.spacesurfer.collisions.CollisionRectangle;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.managers.ExplosionManager;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
+import com.emreozgenc.spacesurfer.screens.GameScreen;
 
 import java.util.Random;
 
@@ -62,6 +63,7 @@ public class Enemy {
                 if(bullet.getCollision().isCollide(col)) {
                     ObjectArrays.Renemies.add(this);
                     ExplosionManager.createExplosion(posX, posY);
+                    GameScreen.score++;
                 }
             }
         }
