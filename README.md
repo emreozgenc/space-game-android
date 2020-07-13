@@ -11,7 +11,7 @@
 - [x] Enemy spawn
 - [x] Enemy fire
 - [x] Collision detection and remove object from scene
-- [ ] Explosions
+- [x] Explosions
 - [ ] Score count
 - [ ] Sound effects
 - [ ] Main menu
