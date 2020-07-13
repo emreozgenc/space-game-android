@@ -10,7 +10,7 @@
 - [x] Clouds and cloud movement
 - [x] Enemy spawn
 - [x] Enemy fire
-- [ ] Collision detection and remove object from scene
+- [x] Collision detection and remove object from scene
 - [ ] Explosions
 - [ ] Score count
 - [ ] Sound effects
