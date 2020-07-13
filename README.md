@@ -9,7 +9,7 @@
 - [x] Mainship roll animations
 - [x] Clouds and cloud movement
 - [x] Enemy spawn
-- [ ] Enemy fire
+- [x] Enemy fire
 - [ ] Collision detection and remove object from scene
 - [ ] Explosions
 - [ ] Score count
