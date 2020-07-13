@@ -8,7 +8,7 @@
 - [x] Mainship fire
 - [x] Mainship roll animations
 - [x] Clouds and cloud movement
-- [ ] Enemy spawn
+- [x] Enemy spawn
 - [ ] Enemy fire
 - [ ] Collision detection and remove object from scene
 - [ ] Explosions
