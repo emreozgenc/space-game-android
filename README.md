@@ -12,7 +12,7 @@
 - [x] Enemy fire
 - [x] Collision detection and remove object from scene
 - [x] Explosions
-- [ ] Score count
+- [x] Score count
 - [ ] Sound effects
 - [ ] Main menu
 - [ ] Finish and deploy Google Play Store
