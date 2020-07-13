@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.width = SpaceSurfer.WIDTH;
 		config.height = SpaceSurfer.HEIGHT;
 		config.resizable = false;
+		config.samples = 2;
 		new LwjglApplication(new SpaceSurfer(), config);
 	}
 }

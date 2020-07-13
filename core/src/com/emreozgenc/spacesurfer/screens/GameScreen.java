@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.managers.CloudManager;
+import com.emreozgenc.spacesurfer.managers.EnemyManager;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
 import com.emreozgenc.spacesurfer.objects.Cloud;
+import com.emreozgenc.spacesurfer.objects.Enemy;
 import com.emreozgenc.spacesurfer.objects.MainBullet;
 import com.emreozgenc.spacesurfer.objects.MainShip;
 
@@ -30,6 +32,9 @@ public class GameScreen implements Screen {
     // Cloud manager
     private CloudManager cloudManager;
 
+    // Enemy manager
+    private EnemyManager enemyManager;
+
 
     // Screen constructor
     public GameScreen(SpaceSurfer game) {
@@ -41,6 +46,7 @@ public class GameScreen implements Screen {
         mainShip = new MainShip((float)(SpaceSurfer.WIDTH / 2 - Constant.MAIN_SHIP_WIDTH /2),
                 20);
         cloudManager = new CloudManager();
+        enemyManager = new EnemyManager();
     }
 
     @Override
@@ -52,6 +58,7 @@ public class GameScreen implements Screen {
 
         mainShip.update(delta);
         cloudManager.update(delta);
+        enemyManager.update(delta);
 
         // Bullets update
         for(MainBullet bullet : ObjectArrays.mainBullets) {
@@ -61,6 +68,11 @@ public class GameScreen implements Screen {
         // Clouds update
         for(Cloud cloud : ObjectArrays.clouds) {
             cloud.update(delta);
+        }
+
+        // Enemies update
+        for(Enemy enemy : ObjectArrays.enemies) {
+            enemy.update(delta);
         }
     }
 
@@ -73,6 +85,10 @@ public class GameScreen implements Screen {
 
         for(MainBullet bullet : ObjectArrays.mainBullets) {
             bullet.render(batch);
+        }
+
+        for(Enemy enemy : ObjectArrays.enemies) {
+            enemy.render(batch);
         }
 
         mainShip.render(batch);
@@ -89,6 +105,11 @@ public class GameScreen implements Screen {
             ObjectArrays.clouds.removeValue(cloud, true);
         }
         ObjectArrays.Rclouds.clear();
+
+        for(Enemy enemy : ObjectArrays.Renemies) {
+            ObjectArrays.enemies.removeValue(enemy, true);
+        }
+        ObjectArrays.Renemies.clear();
     }
 
     @Override

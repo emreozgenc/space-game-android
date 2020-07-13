@@ -2,6 +2,7 @@ package com.emreozgenc.spacesurfer.objectarray;
 
 import com.badlogic.gdx.utils.Array;
 import com.emreozgenc.spacesurfer.objects.Cloud;
+import com.emreozgenc.spacesurfer.objects.Enemy;
 import com.emreozgenc.spacesurfer.objects.MainBullet;
 
 public class ObjectArrays {
@@ -13,4 +14,8 @@ public class ObjectArrays {
     // Cloud arrays
     public static Array<Cloud> clouds = new Array<>();
     public static Array<Cloud> Rclouds = new Array<>();
+
+    // Enemy arrays
+    public static Array<Enemy> enemies = new Array<>();
+    public static Array<Enemy> Renemies = new Array<>();
 }

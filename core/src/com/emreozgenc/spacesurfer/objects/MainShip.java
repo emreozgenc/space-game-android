@@ -60,7 +60,7 @@ public class MainShip {
 
         TextureRegion[][] tmp2 = TextureRegion.split(bulletTexture,
                 Constant.MAIN_BULLET_TILE_WIDTH,
-                Constant.MAIN_BULLET_TILE_HEIGTH);
+                Constant.MAIN_BULLET_TILE_HEIGHT);
         bulletAnim = new Animation<TextureRegion>(Constant.MAIN_BULLET_FRAME_TIME, tmp2[1]);
 
     }

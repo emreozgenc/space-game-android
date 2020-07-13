@@ -33,7 +33,7 @@ public class Cloud {
         batch.draw(cloudTexture,
                 posX, posY,
                 Constant.CLOUD_WIDTH,
-                Constant.CLOUD_HEIGTH);
+                Constant.CLOUD_HEIGHT);
     }
 
     private void remove() {
