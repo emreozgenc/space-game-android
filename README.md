@@ -19,3 +19,6 @@
 
 ## Asset Package
 I am using [this](https://ansimuz.itch.io/spaceship-shooter-environment) asset package. It is completely free for personal and commercial use. Maybe you want to say thank you.
+
+## How to use?
+Just clone or download repository and open the file with Android Studio or any Java IDE.
