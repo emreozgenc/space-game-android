@@ -12,6 +12,7 @@ import com.emreozgenc.spacesurfer.managers.EnemyManager;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
 import com.emreozgenc.spacesurfer.objects.Cloud;
 import com.emreozgenc.spacesurfer.objects.Enemy;
+import com.emreozgenc.spacesurfer.objects.EnemyBullet;
 import com.emreozgenc.spacesurfer.objects.MainBullet;
 import com.emreozgenc.spacesurfer.objects.MainShip;
 
@@ -60,7 +61,7 @@ public class GameScreen implements Screen {
         cloudManager.update(delta);
         enemyManager.update(delta);
 
-        // Bullets update
+        // Main bullets update
         for(MainBullet bullet : ObjectArrays.mainBullets) {
             bullet.update(delta);
         }
@@ -74,6 +75,11 @@ public class GameScreen implements Screen {
         for(Enemy enemy : ObjectArrays.enemies) {
             enemy.update(delta);
         }
+
+        // Enemy bullets update
+        for(EnemyBullet bullet : ObjectArrays.enemyBullets) {
+            bullet.update(delta);
+        }
     }
 
     private void render2(SpriteBatch batch) {
@@ -81,6 +87,10 @@ public class GameScreen implements Screen {
 
         for(Cloud cloud : ObjectArrays.clouds) {
             cloud.render(batch);
+        }
+
+        for(EnemyBullet bullet : ObjectArrays.enemyBullets) {
+            bullet.render(batch);
         }
 
         for(MainBullet bullet : ObjectArrays.mainBullets) {
@@ -110,6 +120,11 @@ public class GameScreen implements Screen {
             ObjectArrays.enemies.removeValue(enemy, true);
         }
         ObjectArrays.Renemies.clear();
+
+        for(EnemyBullet bullet : ObjectArrays.RenemyBullets) {
+            ObjectArrays.enemyBullets.removeValue(bullet, true);
+        }
+        ObjectArrays.RenemyBullets.clear();
     }
 
     @Override

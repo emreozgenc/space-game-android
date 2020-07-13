@@ -52,4 +52,13 @@ public final class Constant {
     public static final int ENEMY_MAX_POS_X = SpaceSurfer.WIDTH - ENEMY_WIDTH;
     public static final int ENEMY_MIN_POS_Y = -300;
 
+    // Enemy bullet constants
+    public static final int ENEMY_BULLET_SPEED = 750;
+    public static final int ENEMY_BULLET_MIN_POS_Y = -300;
+    public static final int ENEMY_BULLET_WIDTH = 32;
+    public static final int ENEMY_BULLET_HEIGHT = 32;
+    public static final int ENEMY_BULLET_TILE_WIDTH = 16;
+    public static final int ENEMY_BULLET_TILE_HEIGHT = 16;
+    public static final float ENEMY_BULLET_FRAME_TIME = 0.1f;
+
 }

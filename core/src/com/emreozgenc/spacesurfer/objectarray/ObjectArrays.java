@@ -3,6 +3,7 @@ package com.emreozgenc.spacesurfer.objectarray;
 import com.badlogic.gdx.utils.Array;
 import com.emreozgenc.spacesurfer.objects.Cloud;
 import com.emreozgenc.spacesurfer.objects.Enemy;
+import com.emreozgenc.spacesurfer.objects.EnemyBullet;
 import com.emreozgenc.spacesurfer.objects.MainBullet;
 
 public class ObjectArrays {
@@ -10,6 +11,10 @@ public class ObjectArrays {
     // MainBullet arrays
     public static Array<MainBullet> mainBullets = new Array<>();
     public static Array<MainBullet> RmainBullets = new Array<>();
+
+    // EnemyBullet arrays
+    public static Array<EnemyBullet> enemyBullets = new Array<>();
+    public static Array<EnemyBullet> RenemyBullets = new Array<>();
 
     // Cloud arrays
     public static Array<Cloud> clouds = new Array<>();
