@@ -11,7 +11,8 @@ public final class Constant {
     public static final int MAIN_SHIP_TILE_HEIGHT = 24;
     public static final int MAIN_SHIP_SPEED = 400;
     public static final float MAIN_SHIP_CHANGE_TIME = 0.1f;
-    public static final float MAIN_SHIP_FIRE_RATE = 0.75f;
+    public static final float MAIN_SHIP_FIRE_RATE = 0.5f;
+    public static int MAIN_SHIP_HEALTH = 3;
 
     // Main bullet constants
     public static final int MAIN_BULLET_TILE_WIDTH = 16;
@@ -37,14 +38,14 @@ public final class Constant {
     public static final int CLOUD_MIN_POS_Y = -300;
 
     // Enemy manager constants
-    public static final float ENEMY_MANAGER_SPAWN_MAX_TIME = 5f;
-    public static final float ENEMY_MANAGER_SPAWN_MIN_TIME = 3f;
+    public static final float ENEMY_MANAGER_SPAWN_MAX_TIME = 3f;
+    public static final float ENEMY_MANAGER_SPAWN_MIN_TIME = 1.5f;
 
     // Enemy constants
     public static final int ENEMY_TILE_WIDTH = 32;
     public static final int ENEMY_TILE_HEIGHT = 32;
     public static final int ENEMY_SPEED = 150;
-    public static final float ENEMY_FIRE_RATE = 1.5f;
+    public static final float ENEMY_FIRE_RATE = 0.75f;
     public static final int ENEMY_WIDTH = 64;
     public static final int ENEMY_HEIGHT = 64;
     public static final float ENEMY_FRAME_TIME = 0.1f;
@@ -53,7 +54,7 @@ public final class Constant {
     public static final int ENEMY_MIN_POS_Y = -300;
 
     // Enemy bullet constants
-    public static final int ENEMY_BULLET_SPEED = 750;
+    public static final int ENEMY_BULLET_SPEED = 300;
     public static final int ENEMY_BULLET_MIN_POS_Y = -300;
     public static final int ENEMY_BULLET_WIDTH = 32;
     public static final int ENEMY_BULLET_HEIGHT = 32;

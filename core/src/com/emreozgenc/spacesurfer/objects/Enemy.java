@@ -1,5 +1,7 @@
 package com.emreozgenc.spacesurfer.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,12 +23,14 @@ public class Enemy {
     private float stateTimer;
     private float fireTimer;
     private TextureRegion renderTexture;
+    private Sound explosionSound;
 
     public Enemy(Animation<TextureRegion> enemyAnim, Animation<TextureRegion> bulletAnim) {
         this.enemyAnim = enemyAnim;
         this.bulletAnim = bulletAnim;
         rand = new Random();
         col = new CollisionRectangle(posX, posY, Constant.ENEMY_WIDTH, Constant.ENEMY_HEIGHT);
+        explosionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
         stateTimer = 0;
         fireTimer = 0;
         posY = Constant.ENEMY_POS_Y;
@@ -64,6 +68,7 @@ public class Enemy {
                     ObjectArrays.Renemies.add(this);
                     ExplosionManager.createExplosion(posX, posY);
                     GameScreen.score++;
+                    explosionSound.play(0.3f);
                 }
             }
         }

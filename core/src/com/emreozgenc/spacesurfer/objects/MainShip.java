@@ -1,14 +1,20 @@
 package com.emreozgenc.spacesurfer.objects;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
+import com.emreozgenc.spacesurfer.collisions.CollisionRectangle;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
+import com.emreozgenc.spacesurfer.screens.GameScreen;
+
+import java.awt.Rectangle;
 
 import javax.xml.soap.Text;
 
@@ -22,6 +28,10 @@ public class MainShip {
     private Animation<TextureRegion> left2;
     private Animation<TextureRegion> right1;
     private Animation<TextureRegion> right2;
+    private CollisionRectangle col;
+    private int health;
+    private Sound fireSound;
+    private Sound takeDamageSound;
 
     // Animation timers
     private float stateTimer;
@@ -37,10 +47,16 @@ public class MainShip {
     public MainShip(float posX, float posY) {
         this.posX = posX;
         this.posY = posY;
+        col = new CollisionRectangle(posX, posY,
+                Constant.MAIN_SHIP_WIDTH,
+                Constant.MAIN_SHIP_HEIGHT);
+        health = Constant.MAIN_SHIP_HEALTH;
         stateTimer = 0;
         changeTimer = 0;
         state = 0;
         fireTimer = 0;
+        takeDamageSound = Gdx.audio.newSound(Gdx.files.internal("sounds/takedamage.wav"));
+        fireSound = Gdx.audio.newSound(Gdx.files.internal("sounds/mainfire.wav"));
         shipTexture = new Texture(Gdx.files.internal("game-sprites/mainship.png"));
         bulletTexture = new Texture((Gdx.files.internal("game-sprites/bullets.png")));
 
@@ -73,8 +89,20 @@ public class MainShip {
         handleMovement(delta);
         handleAnimation(delta);
         fire(delta);
+        col.update(posX, posY);
+        takeDamage();
     }
 
+    private void takeDamage() {
+        for(EnemyBullet bullet : ObjectArrays.enemyBullets) {
+            if(bullet.getCollision().isCollide(col)) {
+                ObjectArrays.RenemyBullets.add(bullet);
+                health--;
+                System.out.println(health);
+                takeDamageSound.play(0.7f);
+            }
+        }
+    }
     private void handleMovement(float delta) {
         final int screenWidth = Gdx.graphics.getWidth();
 
@@ -174,6 +202,7 @@ public class MainShip {
                     bulletAnim
             ));
             fireTimer = 0;
+            fireSound.play(0.3f);
         }
     }
 }

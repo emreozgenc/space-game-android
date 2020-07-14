@@ -35,7 +35,7 @@ public class GameScreen implements Screen {
     private Texture background;
 
     // Main ship
-    private MainShip mainShip;
+    public MainShip mainShip;
 
     // Cloud manager
     private CloudManager cloudManager;
