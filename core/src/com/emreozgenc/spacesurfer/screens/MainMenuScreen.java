@@ -1,22 +1,22 @@
 package com.emreozgenc.spacesurfer.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 
 
@@ -27,24 +27,27 @@ public class MainMenuScreen implements Screen {
     private Table table;
     private Skin skin;
     private TextButton playButton;
-    private TextButton soundButton;
-    private TextButton vibrateButton;
-    private BitmapFont fontUI;
+    private TextButton exitButton;
+    private Texture logo;
     private Texture background;
     private SpriteBatch batch;
+    private CheckBox soundCheck;
+    private CheckBox vibrateCheck;
+
     public MainMenuScreen(SpaceSurfer game) {
         this.game = game;
         batch = new SpriteBatch();
         skin = new Skin(Gdx.files.internal("ui-sprites/ui_skin.json"));
-        fontUI = new BitmapFont(Gdx.files.internal("fonts/font.fnt"));
+        logo = new Texture(Gdx.files.internal("ui-sprites/logo.png"));
         background = new Texture(Gdx.files.internal("game-sprites/background.png"));
         stage = new Stage(game.viewport);
         table = new Table();
         Gdx.input.setInputProcessor(stage);
         table.setFillParent(true);
-        table.align(Align.center);
+        table.defaults().pad(10);
 
         playButton = new TextButton("PLAY GAME", skin);
+        playButton.getLabel().setFontScale(1.5f, 1.5f);
 
         playButton.addListener(new ClickListener() {
             @Override
@@ -54,31 +57,49 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        soundButton = new TextButton("SOUND SETTING", skin);
+        exitButton = new TextButton("EXIT", skin);
+        exitButton.getLabel().setFontScale(1.5f, 1.5f);
 
-        soundButton.addListener(new ClickListener() {
+        exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                boolean temp = SpaceSurfer.preferences.getBoolean("sound_setting");
-                if(temp) {
-                    SpaceSurfer.preferences.putBoolean("sound_setting", false);
-                    SpaceSurfer.preferences.flush();
-                }
-                else {
-                    SpaceSurfer.preferences.putBoolean("sound_setting", true);
-                    SpaceSurfer.preferences.flush();
-                }
+                Gdx.app.exit();
             }
         });
 
-        vibrateButton = new TextButton("VIBRATE SETTING", skin);
 
+        soundCheck = new CheckBox("Sound ON", skin);
+        soundCheck.getImage().setScaling(Scaling.fill);
+        soundCheck.getImageCell().size(25, 25);
+        soundCheck.setChecked(SpaceSurfer.preferences.getBoolean("sound_setting"));
+
+        soundCheck.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SpaceSurfer.preferences.putBoolean("sound_setting", soundCheck.isChecked());
+                SpaceSurfer.preferences.flush();
+            }
+        });
+
+        vibrateCheck = new CheckBox("Vibration ON", skin);
+        vibrateCheck.getImage().setScaling(Scaling.fill);
+        vibrateCheck.getImageCell().size(25, 25);
+        vibrateCheck.setChecked(SpaceSurfer.preferences.getBoolean("vibrate_setting"));
+
+        vibrateCheck.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SpaceSurfer.preferences.putBoolean("vibrate_setting", vibrateCheck.isChecked());
+                SpaceSurfer.preferences.flush();
+            }
+        });
+        table.add(playButton).size(300, 80).padBottom(25).colspan(2);
         table.row();
-        table.add(playButton).size(300, 80).padBottom(25);
+        table.add(exitButton).size(300, 80).padBottom(25).colspan(2);
         table.row();
-        table.add(soundButton).size(300, 80).padBottom(25);
+        table.add(soundCheck).align(Align.left).colspan(1);
+        table.add(vibrateCheck).align(Align.right).colspan(1);
         table.row();
-        table.add(vibrateButton).size(300, 80);
         stage.addActor(table);
     }
 
@@ -94,6 +115,9 @@ public class MainMenuScreen implements Screen {
         batch.setProjectionMatrix(game.cam.combined);
         batch.begin();
         batch.draw(background, 0, 0, SpaceSurfer.WIDTH, SpaceSurfer.HEIGHT);
+        batch.draw(logo,
+                SpaceSurfer.WIDTH / 2 - logo.getWidth() / 2,
+                SpaceSurfer.HEIGHT - 200);
         batch.end();
 
         stage.act(delta);

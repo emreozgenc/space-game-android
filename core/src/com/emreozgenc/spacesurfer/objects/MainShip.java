@@ -1,9 +1,6 @@
 package com.emreozgenc.spacesurfer.objects;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -13,7 +10,6 @@ import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.collisions.CollisionRectangle;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
-import com.emreozgenc.spacesurfer.screens.GameScreen;
 
 public class MainShip {
     private float posX;
@@ -98,6 +94,9 @@ public class MainShip {
                 System.out.println(health);
                 if(SpaceSurfer.preferences.getBoolean("sound_setting")) {
                     takeDamageSound.play(0.7f);
+                }
+                if(SpaceSurfer.preferences.getBoolean("vibrate_setting")) {
+                    Gdx.input.vibrate(100);
                 }
             }
         }
