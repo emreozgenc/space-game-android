@@ -1,5 +1,10 @@
 # SpaceSurfer - Android Game
 
+## Screenshots
+
+![ss1](images/ss1.jpg)
+![ss2](images/ss2.jpg)
+
 ## To Do List
 - [x] Cam and viewport
 - [x] Background image
