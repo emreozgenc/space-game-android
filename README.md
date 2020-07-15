@@ -2,8 +2,8 @@
 
 ## Screenshots
 
-![ss1](images/ss1.jpg){:height="25%" width="25%"}
-![ss2](images/ss2.jpg){:height="25%" width="25%"}
+<img src="images/ss1.png" width="25%" height="25%">
+<img src="images/ss2.png" width="25%" height="25%">
 
 ## To Do List
 - [x] Cam and viewport
