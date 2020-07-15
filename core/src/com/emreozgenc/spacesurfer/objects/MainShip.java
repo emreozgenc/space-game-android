@@ -2,6 +2,7 @@ package com.emreozgenc.spacesurfer.objects;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -95,7 +96,9 @@ public class MainShip {
                 ObjectArrays.RenemyBullets.add(bullet);
                 health--;
                 System.out.println(health);
-                takeDamageSound.play(0.7f);
+                if(SpaceSurfer.preferences.getBoolean("sound_setting")) {
+                    takeDamageSound.play(0.7f);
+                }
             }
         }
     }
@@ -198,7 +201,9 @@ public class MainShip {
                     bulletAnim
             ));
             fireTimer = 0;
-            fireSound.play(0.3f);
+            if(SpaceSurfer.preferences.getBoolean("sound_setting")) {
+                fireSound.play(0.3f);
+            }
         }
     }
 }

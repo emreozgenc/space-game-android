@@ -16,21 +16,23 @@ public class SpaceSurfer extends Game {
 
 	public OrthographicCamera cam;
 	public StretchViewport viewport;
-	private Preferences pref;
+	public static Preferences preferences;
 	
 	@Override
 	public void create () {
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, WIDTH, HEIGHT);
 		viewport = new StretchViewport(WIDTH, HEIGHT, cam);
-		pref = Gdx.app.getPreferences("settings");
+		preferences = Gdx.app.getPreferences("settings");
 
-		if(!pref.contains("sound_setting")) {
-			pref.putBoolean("sound_setting", true);
+		if(!preferences.contains("sound_setting")) {
+			preferences.putBoolean("sound_setting", true);
+			preferences.flush();
 		}
 
-		if(!pref.contains("vibrate_setting")) {
-			pref.putBoolean("vibrate_setting", true);
+		if(!preferences.contains("vibrate_setting")) {
+			preferences.putBoolean("vibrate_setting", true);
+			preferences.flush();
 		}
 
 		this.setScreen(new MainMenuScreen(this));

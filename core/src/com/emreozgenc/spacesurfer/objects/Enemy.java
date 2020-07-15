@@ -1,10 +1,12 @@
 package com.emreozgenc.spacesurfer.objects;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.collisions.CollisionRectangle;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.managers.ExplosionManager;
@@ -68,7 +70,9 @@ public class Enemy {
                     ObjectArrays.Renemies.add(this);
                     ExplosionManager.createExplosion(posX, posY);
                     GameScreen.score++;
-                    explosionSound.play(0.3f);
+                    if(SpaceSurfer.preferences.getBoolean("sound_setting")) {
+                        explosionSound.play(0.3f);
+                    }
                 }
             }
         }

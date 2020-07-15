@@ -54,8 +54,23 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-
         soundButton = new TextButton("SOUND SETTING", skin);
+
+        soundButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                boolean temp = SpaceSurfer.preferences.getBoolean("sound_setting");
+                if(temp) {
+                    SpaceSurfer.preferences.putBoolean("sound_setting", false);
+                    SpaceSurfer.preferences.flush();
+                }
+                else {
+                    SpaceSurfer.preferences.putBoolean("sound_setting", true);
+                    SpaceSurfer.preferences.flush();
+                }
+            }
+        });
+
         vibrateButton = new TextButton("VIBRATE SETTING", skin);
 
         table.row();
@@ -76,7 +91,7 @@ public class MainMenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl20.glClearColor(0, 0, 0, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        batch.setProjectionMatrix(game.cam.combined);
         batch.begin();
         batch.draw(background, 0, 0, SpaceSurfer.WIDTH, SpaceSurfer.HEIGHT);
         batch.end();
@@ -87,7 +102,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        game.viewport.update(width, height);
     }
 
     @Override
