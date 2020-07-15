@@ -1,9 +1,13 @@
 package com.emreozgenc.spacesurfer;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.emreozgenc.spacesurfer.screens.GameScreen;
+import com.emreozgenc.spacesurfer.screens.MainMenuScreen;
 
 public class SpaceSurfer extends Game {
 
@@ -12,13 +16,23 @@ public class SpaceSurfer extends Game {
 
 	public OrthographicCamera cam;
 	public StretchViewport viewport;
+	private Preferences pref;
 	
 	@Override
 	public void create () {
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, WIDTH, HEIGHT);
 		viewport = new StretchViewport(WIDTH, HEIGHT, cam);
+		pref = Gdx.app.getPreferences("settings");
 
-		this.setScreen(new GameScreen(this));
+		if(!pref.contains("sound_setting")) {
+			pref.putBoolean("sound_setting", true);
+		}
+
+		if(!pref.contains("vibrate_setting")) {
+			pref.putBoolean("vibrate_setting", true);
+		}
+
+		this.setScreen(new MainMenuScreen(this));
 	}
 }

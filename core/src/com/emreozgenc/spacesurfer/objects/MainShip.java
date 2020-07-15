@@ -14,10 +14,6 @@ import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
 import com.emreozgenc.spacesurfer.screens.GameScreen;
 
-import java.awt.Rectangle;
-
-import javax.xml.soap.Text;
-
 public class MainShip {
     private float posX;
     private float posY;
