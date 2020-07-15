@@ -14,7 +14,7 @@
 - [x] Explosions
 - [x] Score count
 - [x] Sound effects
-- [ ] Main menu
+- [x] Main menu
 - [ ] Finish and deploy Google Play Store
 
 ## Asset Package
