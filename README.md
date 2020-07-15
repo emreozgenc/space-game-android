@@ -2,8 +2,8 @@
 
 ## Screenshots
 
-![ss1](images/ss1.jpg =250x)
-![ss2](images/ss2.jpg =250x)
+![ss1](images/ss1.jpg){:height="25%" width="25%"}
+![ss2](images/ss2.jpg){:height="25%" width="25%"}
 
 ## To Do List
 - [x] Cam and viewport
