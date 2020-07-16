@@ -7,9 +7,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.managers.CloudManager;
@@ -28,6 +33,10 @@ import com.emreozgenc.spacesurfer.objects.ScoreText;
 public class GameScreen implements Screen {
     // Access main game class
     private SpaceSurfer game;
+
+
+    private Stage stage;
+    private Table table;
 
     // Sprite batch for drawing
     private SpriteBatch batch;
@@ -64,6 +73,30 @@ public class GameScreen implements Screen {
         explosionManager = new ExplosionManager();
         scoreText = new ScoreText();
         score = 0;
+        stageInit();
+    }
+
+    private void stageInit() {
+        stage = new Stage(game.viewport);
+        Gdx.input.setInputProcessor(stage);
+        table = new Table();
+        Skin skin = new Skin(Gdx.files.internal("ui-sprites/ui_skin.json"));
+        table.setBounds(0, 0, SpaceSurfer.WIDTH, SpaceSurfer.HEIGHT);
+        table.setFillParent(true);
+        table.align(Align.right | Align.top);
+
+        final TextButton exitButton = new TextButton("X", skin);
+
+        exitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                SpaceSurfer temp = (SpaceSurfer)Gdx.app.getApplicationListener();
+                temp.setScreen(new MainMenuScreen(temp));
+            }
+        });
+
+        table.add(exitButton).size(25, 25).padTop(10).padRight(10);
+        stage.addActor(table);
     }
 
     @Override
@@ -161,7 +194,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         //Before drawing we need update our objects
         update(delta);
 
@@ -173,6 +205,8 @@ public class GameScreen implements Screen {
         render2(batch);
         batch.end();
 
+        stage.act(delta);
+        stage.draw();
         //After draw if we need remove something in scene
         remove(delta);
     }

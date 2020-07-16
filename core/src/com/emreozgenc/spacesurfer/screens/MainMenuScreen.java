@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 
 
@@ -47,7 +48,6 @@ public class MainMenuScreen implements Screen {
         table.defaults().pad(10);
 
         playButton = new TextButton("PLAY GAME", skin);
-        playButton.getLabel().setFontScale(1.5f, 1.5f);
 
         playButton.addListener(new ClickListener() {
             @Override
@@ -58,7 +58,6 @@ public class MainMenuScreen implements Screen {
         });
 
         exitButton = new TextButton("EXIT", skin);
-        exitButton.getLabel().setFontScale(1.5f, 1.5f);
 
         exitButton.addListener(new ClickListener() {
             @Override
@@ -69,8 +68,6 @@ public class MainMenuScreen implements Screen {
 
 
         soundCheck = new CheckBox("Sound ON", skin);
-        soundCheck.getImage().setScaling(Scaling.fill);
-        soundCheck.getImageCell().size(25, 25);
         soundCheck.setChecked(SpaceSurfer.preferences.getBoolean("sound_setting"));
 
         soundCheck.addListener(new ChangeListener() {
@@ -82,8 +79,6 @@ public class MainMenuScreen implements Screen {
         });
 
         vibrateCheck = new CheckBox("Vibration ON", skin);
-        vibrateCheck.getImage().setScaling(Scaling.fill);
-        vibrateCheck.getImageCell().size(25, 25);
         vibrateCheck.setChecked(SpaceSurfer.preferences.getBoolean("vibrate_setting"));
 
         vibrateCheck.addListener(new ChangeListener() {
@@ -93,9 +88,9 @@ public class MainMenuScreen implements Screen {
                 SpaceSurfer.preferences.flush();
             }
         });
-        table.add(playButton).size(300, 80).padBottom(25).colspan(2);
+        table.add(playButton).size(300, 50).padBottom(25).colspan(2);
         table.row();
-        table.add(exitButton).size(300, 80).padBottom(25).colspan(2);
+        table.add(exitButton).size(300, 50).padBottom(25).colspan(2);
         table.row();
         table.add(soundCheck).align(Align.left).colspan(1);
         table.add(vibrateCheck).align(Align.right).colspan(1);

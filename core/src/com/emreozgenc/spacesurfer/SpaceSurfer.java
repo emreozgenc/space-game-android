@@ -1,12 +1,10 @@
 package com.emreozgenc.spacesurfer;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.emreozgenc.spacesurfer.screens.GameScreen;
 import com.emreozgenc.spacesurfer.screens.MainMenuScreen;
 
 public class SpaceSurfer extends Game {
