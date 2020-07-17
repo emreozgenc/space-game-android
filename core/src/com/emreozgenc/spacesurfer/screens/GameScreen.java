@@ -1,15 +1,12 @@
 package com.emreozgenc.spacesurfer.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -66,7 +63,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         Gdx.graphics.setVSync(true);
         background = new Texture(Gdx.files.internal("game-sprites/background.png"));
-        mainShip = new MainShip((float)(SpaceSurfer.WIDTH / 2 - Constant.MAIN_SHIP_WIDTH /2),
+        mainShip = new MainShip((float) (SpaceSurfer.WIDTH / 2 - Constant.MAIN_SHIP_WIDTH / 2),
                 20);
         cloudManager = new CloudManager();
         enemyManager = new EnemyManager();
@@ -90,7 +87,7 @@ public class GameScreen implements Screen {
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                SpaceSurfer temp = (SpaceSurfer)Gdx.app.getApplicationListener();
+                SpaceSurfer temp = (SpaceSurfer) Gdx.app.getApplicationListener();
                 temp.setScreen(new MainMenuScreen(temp));
             }
         });
@@ -112,27 +109,27 @@ public class GameScreen implements Screen {
         scoreText.update();
 
         // Main bullets update
-        for(MainBullet bullet : ObjectArrays.mainBullets) {
+        for (MainBullet bullet : ObjectArrays.mainBullets) {
             bullet.update(delta);
         }
 
         // Clouds update
-        for(Cloud cloud : ObjectArrays.clouds) {
+        for (Cloud cloud : ObjectArrays.clouds) {
             cloud.update(delta);
         }
 
         // Enemies update
-        for(Enemy enemy : ObjectArrays.enemies) {
+        for (Enemy enemy : ObjectArrays.enemies) {
             enemy.update(delta);
         }
 
         // Enemy bullets update
-        for(EnemyBullet bullet : ObjectArrays.enemyBullets) {
+        for (EnemyBullet bullet : ObjectArrays.enemyBullets) {
             bullet.update(delta);
         }
 
         // Explosions update
-        for(Explosion explosion : ObjectArrays.explosions) {
+        for (Explosion explosion : ObjectArrays.explosions) {
             explosion.update(delta);
         }
     }
@@ -140,23 +137,23 @@ public class GameScreen implements Screen {
     private void render2(SpriteBatch batch) {
         batch.draw(background, 0, 0, SpaceSurfer.WIDTH, SpaceSurfer.HEIGHT);
 
-        for(Cloud cloud : ObjectArrays.clouds) {
+        for (Cloud cloud : ObjectArrays.clouds) {
             cloud.render(batch);
         }
 
-        for(EnemyBullet bullet : ObjectArrays.enemyBullets) {
+        for (EnemyBullet bullet : ObjectArrays.enemyBullets) {
             bullet.render(batch);
         }
 
-        for(MainBullet bullet : ObjectArrays.mainBullets) {
+        for (MainBullet bullet : ObjectArrays.mainBullets) {
             bullet.render(batch);
         }
 
-        for(Enemy enemy : ObjectArrays.enemies) {
+        for (Enemy enemy : ObjectArrays.enemies) {
             enemy.render(batch);
         }
 
-        for(Explosion explosion : ObjectArrays.explosions) {
+        for (Explosion explosion : ObjectArrays.explosions) {
             explosion.render(batch);
         }
         mainShip.render(batch);
@@ -165,27 +162,27 @@ public class GameScreen implements Screen {
 
     private void remove(float delta) {
 
-        for(MainBullet bullet : ObjectArrays.RmainBullets) {
+        for (MainBullet bullet : ObjectArrays.RmainBullets) {
             ObjectArrays.mainBullets.removeValue(bullet, true);
         }
         ObjectArrays.RmainBullets.clear();
 
-        for(Cloud cloud : ObjectArrays.Rclouds) {
+        for (Cloud cloud : ObjectArrays.Rclouds) {
             ObjectArrays.clouds.removeValue(cloud, true);
         }
         ObjectArrays.Rclouds.clear();
 
-        for(Enemy enemy : ObjectArrays.Renemies) {
+        for (Enemy enemy : ObjectArrays.Renemies) {
             ObjectArrays.enemies.removeValue(enemy, true);
         }
         ObjectArrays.Renemies.clear();
 
-        for(EnemyBullet bullet : ObjectArrays.RenemyBullets) {
+        for (EnemyBullet bullet : ObjectArrays.RenemyBullets) {
             ObjectArrays.enemyBullets.removeValue(bullet, true);
         }
         ObjectArrays.RenemyBullets.clear();
 
-        for(Explosion explosion : ObjectArrays.Rexplosions) {
+        for (Explosion explosion : ObjectArrays.Rexplosions) {
             ObjectArrays.explosions.removeValue(explosion, true);
         }
         ObjectArrays.Rexplosions.clear();

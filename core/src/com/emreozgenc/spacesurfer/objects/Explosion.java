@@ -34,7 +34,7 @@ public class Explosion {
     }
 
     public void remove() {
-        if(explosionAnimation.isAnimationFinished(stateTimer)) {
+        if (explosionAnimation.isAnimationFinished(stateTimer)) {
             ObjectArrays.Rexplosions.add(this);
         }
     }

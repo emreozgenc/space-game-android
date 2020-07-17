@@ -42,7 +42,7 @@ public class EnemyManager {
         spawnTimer += delta;
         createSpawnTime();
 
-        if(Math.abs(spawnTimer) > spawnTime) {
+        if (Math.abs(spawnTimer) > spawnTime) {
             ObjectArrays.enemies.add(new Enemy(enemyAnim, bulletAnim));
             spawnTimer = 0;
             canCreate = true;
@@ -50,10 +50,10 @@ public class EnemyManager {
     }
 
     private void createSpawnTime() {
-        if(canCreate) {
+        if (canCreate) {
             spawnTime = Constant.ENEMY_MANAGER_SPAWN_MIN_TIME +
                     rand.nextFloat() *
-                    (Constant.ENEMY_MANAGER_SPAWN_MAX_TIME - Constant.ENEMY_MANAGER_SPAWN_MIN_TIME);
+                            (Constant.ENEMY_MANAGER_SPAWN_MAX_TIME - Constant.ENEMY_MANAGER_SPAWN_MIN_TIME);
             canCreate = false;
         }
     }

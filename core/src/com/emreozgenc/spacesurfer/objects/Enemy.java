@@ -1,6 +1,5 @@
 package com.emreozgenc.spacesurfer.objects;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -61,16 +60,15 @@ public class Enemy {
     }
 
     private void remove() {
-        if(posY < Constant.ENEMY_MIN_POS_Y) {
+        if (posY < Constant.ENEMY_MIN_POS_Y) {
             ObjectArrays.Renemies.add(this);
-        }
-        else {
-            for(MainBullet bullet : ObjectArrays.mainBullets) {
-                if(bullet.getCollision().isCollide(col)) {
+        } else {
+            for (MainBullet bullet : ObjectArrays.mainBullets) {
+                if (bullet.getCollision().isCollide(col)) {
                     ObjectArrays.Renemies.add(this);
                     ExplosionManager.createExplosion(posX, posY);
                     GameScreen.score++;
-                    if(SpaceSurfer.preferences.getBoolean("sound_setting")) {
+                    if (SpaceSurfer.preferences.getBoolean("sound_setting")) {
                         explosionSound.play(0.3f);
                     }
                 }
@@ -79,7 +77,7 @@ public class Enemy {
     }
 
     private void fire() {
-        if(Math.abs(fireTimer) > Constant.ENEMY_FIRE_RATE) {
+        if (Math.abs(fireTimer) > Constant.ENEMY_FIRE_RATE) {
             ObjectArrays.enemyBullets.add(new EnemyBullet(posX, posY, bulletAnim));
             fireTimer = 0;
         }

@@ -87,35 +87,35 @@ public class MainShip {
     }
 
     private void takeDamage() {
-        for(EnemyBullet bullet : ObjectArrays.enemyBullets) {
-            if(bullet.getCollision().isCollide(col)) {
+        for (EnemyBullet bullet : ObjectArrays.enemyBullets) {
+            if (bullet.getCollision().isCollide(col)) {
                 ObjectArrays.RenemyBullets.add(bullet);
                 health--;
                 System.out.println(health);
-                if(SpaceSurfer.preferences.getBoolean("sound_setting")) {
+                if (SpaceSurfer.preferences.getBoolean("sound_setting")) {
                     takeDamageSound.play(0.7f);
                 }
-                if(SpaceSurfer.preferences.getBoolean("vibrate_setting")) {
+                if (SpaceSurfer.preferences.getBoolean("vibrate_setting")) {
                     Gdx.input.vibrate(100);
                 }
             }
         }
     }
+
     private void handleMovement(float delta) {
         final int screenWidth = Gdx.graphics.getWidth();
 
-        if(Gdx.input.isTouched()) {
-            if(Gdx.input.getX() > screenWidth / 2) {
+        if (Gdx.input.isTouched()) {
+            if (Gdx.input.getX() > screenWidth / 2) {
                 posX += delta * Constant.MAIN_SHIP_SPEED;
-            }
-            else {
+            } else {
                 posX -= delta * Constant.MAIN_SHIP_SPEED;
             }
 
-            if(posX < 5)
+            if (posX < 5)
                 posX = 5;
 
-            if(posX > SpaceSurfer.WIDTH - Constant.MAIN_SHIP_WIDTH - 5)
+            if (posX > SpaceSurfer.WIDTH - Constant.MAIN_SHIP_WIDTH - 5)
                 posX = SpaceSurfer.WIDTH - Constant.MAIN_SHIP_WIDTH - 5;
         }
     }
@@ -124,83 +124,81 @@ public class MainShip {
         final int screenWidth = Gdx.graphics.getWidth();
         stateTimer += delta;
 
-        if(Gdx.input.isTouched()) {
+        if (Gdx.input.isTouched()) {
             changeTimer += delta;
-            if(Gdx.input.getX() < screenWidth / 2) {
-                if(Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
+            if (Gdx.input.getX() < screenWidth / 2) {
+                if (Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
                     state--;
                     changeTimer = 0;
 
-                    if(state < -2)
+                    if (state < -2)
                         state = -2;
                 }
 
-                if(state == -1)
+                if (state == -1)
                     renderTexture = left1.getKeyFrame(stateTimer, true);
 
-                if(state == -2)
+                if (state == -2)
                     renderTexture = left2.getKeyFrame(stateTimer, true);
-            }
-            else {
-                if(Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
+            } else {
+                if (Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
                     state++;
                     changeTimer = 0;
 
-                    if(state > 2)
+                    if (state > 2)
                         state = 2;
                 }
 
-                if(state == 1)
+                if (state == 1)
                     renderTexture = right1.getKeyFrame(stateTimer, true);
 
-                if(state == 2)
+                if (state == 2)
                     renderTexture = right2.getKeyFrame(stateTimer, true);
             }
             if (state == 0)
                 renderTexture = idle.getKeyFrame(stateTimer, true);
-        }
-        else {
+        } else {
             changeTimer += delta;
-            if(state < 0) {
-                if(Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
+            if (state < 0) {
+                if (Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
                     state++;
                     changeTimer = 0;
                 }
             }
 
-            if(state > 0) {
-                if(Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
+            if (state > 0) {
+                if (Math.abs(changeTimer) > Constant.MAIN_SHIP_CHANGE_TIME) {
                     state--;
                     changeTimer = 0;
                 }
             }
 
-            if(state == -1)
+            if (state == -1)
                 renderTexture = left1.getKeyFrame(stateTimer, true);
 
-            else if(state == -2)
+            else if (state == -2)
                 renderTexture = left2.getKeyFrame(stateTimer, true);
 
-            else if(state == 1)
+            else if (state == 1)
                 renderTexture = right1.getKeyFrame(stateTimer, true);
 
-            else if(state == 2)
+            else if (state == 2)
                 renderTexture = right2.getKeyFrame(stateTimer, true);
-            else if(state == 0)
+            else if (state == 0)
                 renderTexture = idle.getKeyFrame(stateTimer, true);
         }
     }
 
     private void fire(float delta) {
         fireTimer += delta;
-        if(Math.abs(fireTimer) > Constant.MAIN_SHIP_FIRE_RATE) {
+        if (Math.abs(fireTimer) > Constant.MAIN_SHIP_FIRE_RATE) {
             ObjectArrays.mainBullets.add(new MainBullet(
                     posX + Constant.MAIN_BULLET_WIDTH / 2,
                     posY,
                     bulletAnim
             ));
             fireTimer = 0;
-            if(SpaceSurfer.preferences.getBoolean("sound_setting")) {
+            if (SpaceSurfer.preferences.getBoolean("sound_setting")) {
                 fireSound.play(0.3f);
             }
         }

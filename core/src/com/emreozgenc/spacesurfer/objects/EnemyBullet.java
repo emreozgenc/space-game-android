@@ -45,7 +45,7 @@ public class EnemyBullet {
     }
 
     private void remove() {
-        if(posY < Constant.ENEMY_BULLET_MIN_POS_Y) {
+        if (posY < Constant.ENEMY_BULLET_MIN_POS_Y) {
             ObjectArrays.RenemyBullets.add(this);
         }
     }

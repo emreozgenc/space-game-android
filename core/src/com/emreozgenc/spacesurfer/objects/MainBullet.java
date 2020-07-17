@@ -40,12 +40,11 @@ public class MainBullet {
     }
 
     public void remove() {
-        if(posY > Constant.MAIN_BULLET_MAX_POS_Y) {
+        if (posY > Constant.MAIN_BULLET_MAX_POS_Y) {
             ObjectArrays.RmainBullets.add(this);
-        }
-        else {
-            for(Enemy enemy : ObjectArrays.enemies) {
-                if(enemy.getCollision().isCollide(col)) {
+        } else {
+            for (Enemy enemy : ObjectArrays.enemies) {
+                if (enemy.getCollision().isCollide(col)) {
                     ObjectArrays.RmainBullets.add(this);
                 }
             }

@@ -21,8 +21,8 @@ public class CloudManager {
         canCreate = true;
         cloudTextures = new Texture[Constant.CLOUD_MANAGER_CLOUD_COUNT];
         String path = "game-sprites/cloud";
-        for(int i=0; i<Constant.CLOUD_MANAGER_CLOUD_COUNT; i++) {
-            String temp = path + (i+1) + ".png";
+        for (int i = 0; i < Constant.CLOUD_MANAGER_CLOUD_COUNT; i++) {
+            String temp = path + (i + 1) + ".png";
             cloudTextures[i] = new Texture(Gdx.files.internal(temp));
         }
     }
@@ -30,7 +30,7 @@ public class CloudManager {
     public void update(float delta) {
         spawnTimer += delta;
         createSpawnTime();
-        if(Math.abs(spawnTimer) > spawnTime) {
+        if (Math.abs(spawnTimer) > spawnTime) {
             createCloud();
             spawnTimer = 0;
             canCreate = true;
@@ -38,10 +38,10 @@ public class CloudManager {
     }
 
     private void createSpawnTime() {
-        if(canCreate) {
+        if (canCreate) {
             spawnTime = Constant.CLOUD_MANAGER_SPAWN_MIN_TIME +
                     rand.nextFloat() *
-                    (Constant.CLOUD_MANAGER_SPAWN_MAX_TIME - Constant.CLOUD_MANAGER_SPAWN_MIN_TIME);
+                            (Constant.CLOUD_MANAGER_SPAWN_MAX_TIME - Constant.CLOUD_MANAGER_SPAWN_MIN_TIME);
 
             canCreate = false;
 

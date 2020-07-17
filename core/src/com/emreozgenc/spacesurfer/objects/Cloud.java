@@ -18,7 +18,7 @@ public class Cloud {
         rand = new Random();
         speed = (Constant.CLOUD_SPEED_MIN +
                 rand.nextFloat() *
-                (Constant.CLOUD_SPEED_MAX - Constant.CLOUD_SPEED_MIN));
+                        (Constant.CLOUD_SPEED_MAX - Constant.CLOUD_SPEED_MIN));
         posX = Constant.CLOUD_POS_X;
         posY = Constant.CLOUD_POS_Y;
         this.cloudTexture = cloudTexture;
@@ -37,7 +37,7 @@ public class Cloud {
     }
 
     private void remove() {
-        if(posY < Constant.CLOUD_MIN_POS_Y) {
+        if (posY < Constant.CLOUD_MIN_POS_Y) {
             ObjectArrays.Rclouds.add(this);
         }
     }
