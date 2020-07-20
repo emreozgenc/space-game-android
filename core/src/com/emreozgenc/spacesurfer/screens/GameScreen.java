@@ -230,6 +230,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        batch.dispose();
+        stage.dispose();
+        background.dispose();
+        mainShip.dispose();
     }
 }

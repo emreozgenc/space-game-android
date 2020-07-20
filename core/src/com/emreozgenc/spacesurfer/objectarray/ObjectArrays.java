@@ -28,4 +28,17 @@ public class ObjectArrays {
     // Explosion arrays
     public static Array<Explosion> explosions = new Array<>();
     public static Array<Explosion> Rexplosions = new Array<>();
+
+    public static void clearAll() {
+        mainBullets.clear();
+        RmainBullets.clear();
+        enemyBullets.clear();
+        RenemyBullets.clear();
+        clouds.clear();
+        Rclouds.clear();
+        enemies.clear();
+        Renemies.clear();
+        explosions.clear();
+        Rexplosions.clear();
+    }
 }

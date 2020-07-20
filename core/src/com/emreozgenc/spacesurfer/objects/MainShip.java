@@ -2,19 +2,23 @@ package com.emreozgenc.spacesurfer.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.emreozgenc.spacesurfer.SpaceSurfer;
 import com.emreozgenc.spacesurfer.collisions.CollisionRectangle;
 import com.emreozgenc.spacesurfer.constant.Constant;
 import com.emreozgenc.spacesurfer.objectarray.ObjectArrays;
+import com.emreozgenc.spacesurfer.screens.MainMenuScreen;
 
 public class MainShip {
     private float posX;
     private float posY;
     private Texture shipTexture;
+    private Sprite healthBar;
     private TextureRegion renderTexture;
     private Animation<TextureRegion> idle;
     private Animation<TextureRegion> left1;
@@ -52,6 +56,9 @@ public class MainShip {
         fireSound = Gdx.audio.newSound(Gdx.files.internal("sounds/mainfire.wav"));
         shipTexture = new Texture(Gdx.files.internal("game-sprites/mainship.png"));
         bulletTexture = new Texture((Gdx.files.internal("game-sprites/bullets.png")));
+        healthBar = new Sprite(new Texture(Gdx.files.internal("game-sprites/health.png")));
+        healthBar.setColor(new Color(0, 1, 0, 1));
+        healthBar.setPosition(0, 0);
 
         // Ship animation initialize
 
@@ -76,6 +83,7 @@ public class MainShip {
 
     public void render(SpriteBatch batch) {
         batch.draw(renderTexture, posX, posY, Constant.MAIN_SHIP_WIDTH, Constant.MAIN_SHIP_HEIGHT);
+        healthBar.draw(batch);
     }
 
     public void update(float delta) {
@@ -90,7 +98,7 @@ public class MainShip {
         for (EnemyBullet bullet : ObjectArrays.enemyBullets) {
             if (bullet.getCollision().isCollide(col)) {
                 ObjectArrays.RenemyBullets.add(bullet);
-                health--;
+                decreaseHealth();
                 System.out.println(health);
                 if (SpaceSurfer.preferences.getBoolean("sound_setting")) {
                     takeDamageSound.play(0.7f);
@@ -99,6 +107,19 @@ public class MainShip {
                     Gdx.input.vibrate(100);
                 }
             }
+        }
+    }
+
+    private void decreaseHealth() {
+        health--;
+        if(health == 2)
+            healthBar.setColor(new Color(1, 1, 0, 1));
+        if(health == 1)
+            healthBar.setColor(new Color(1, 0, 0, 1));
+        if(health <= 0) {
+            SpaceSurfer game = (SpaceSurfer) Gdx.app.getApplicationListener();
+            game.setScreen(new MainMenuScreen(game));
+            ObjectArrays.clearAll();
         }
     }
 
@@ -202,5 +223,12 @@ public class MainShip {
                 fireSound.play(0.3f);
             }
         }
+    }
+
+    public void dispose() {
+        shipTexture.dispose();
+        fireSound.dispose();
+        takeDamageSound.dispose();
+        bulletTexture.dispose();
     }
 }
