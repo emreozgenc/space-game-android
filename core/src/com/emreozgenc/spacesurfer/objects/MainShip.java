@@ -99,7 +99,6 @@ public class MainShip {
             if (bullet.getCollision().isCollide(col)) {
                 ObjectArrays.RenemyBullets.add(bullet);
                 decreaseHealth();
-                System.out.println(health);
                 if (SpaceSurfer.preferences.getBoolean("sound_setting")) {
                     takeDamageSound.play(0.7f);
                 }
