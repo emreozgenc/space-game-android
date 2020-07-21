@@ -15,7 +15,16 @@
 - [x] Score count
 - [x] Sound effects
 - [x] Main menu
-- [ ] Finish and deploy Google Play Store
+- [x] Voice and vibration settings
+- [x] Vibration
+- [x] Best score
+- [x] Finish and share apk
+
+## Download Link
+You can download apk file from [here](https://www.dropbox.com/s/9gfdro0ip21lwzi/spacesurfer.apk?dl=0).
+
+## How to change game settings?
+You can change easily game settings. Just open Constants class and change constants.
 
 ## Asset Package
 I am using [this](https://ansimuz.itch.io/spaceship-shooter-environment) asset package. It is completely free for personal and commercial use. Maybe you want to say thank you.
