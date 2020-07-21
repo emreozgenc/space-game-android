@@ -71,6 +71,11 @@ public class Enemy {
                     if (SpaceSurfer.preferences.getBoolean("sound_setting")) {
                         explosionSound.play(0.3f);
                     }
+
+                    if(SpaceSurfer.highScore.getInteger("high_score") < GameScreen.score) {
+                        SpaceSurfer.highScore.putInteger("high_score", GameScreen.score);
+                        SpaceSurfer.highScore.flush();
+                    }
                 }
             }
         }

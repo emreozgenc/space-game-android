@@ -15,6 +15,7 @@ public class SpaceSurfer extends Game {
     public OrthographicCamera cam;
     public StretchViewport viewport;
     public static Preferences preferences;
+    public static Preferences highScore;
 
     @Override
     public void create() {
@@ -22,6 +23,7 @@ public class SpaceSurfer extends Game {
         cam.setToOrtho(false, WIDTH, HEIGHT);
         viewport = new StretchViewport(WIDTH, HEIGHT, cam);
         preferences = Gdx.app.getPreferences("settings");
+        highScore = Gdx.app.getPreferences("score");
 
         if (!preferences.contains("sound_setting")) {
             preferences.putBoolean("sound_setting", true);
@@ -31,6 +33,11 @@ public class SpaceSurfer extends Game {
         if (!preferences.contains("vibrate_setting")) {
             preferences.putBoolean("vibrate_setting", true);
             preferences.flush();
+        }
+
+        if(!highScore.contains("high_score")) {
+            highScore.putInteger("high_score", 0);
+            highScore.flush();
         }
 
         this.setScreen(new MainMenuScreen(this));

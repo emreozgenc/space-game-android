@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -31,6 +33,8 @@ public class MainMenuScreen implements Screen {
     private SpriteBatch batch;
     private CheckBox soundCheck;
     private CheckBox vibrateCheck;
+    private BitmapFont highScoreFont;
+    private GlyphLayout layout;
 
     public MainMenuScreen(SpaceSurfer game) {
         this.game = game;
@@ -38,6 +42,7 @@ public class MainMenuScreen implements Screen {
         skin = new Skin(Gdx.files.internal("ui-sprites/ui_skin.json"));
         logo = new Texture(Gdx.files.internal("ui-sprites/logo.png"));
         background = new Texture(Gdx.files.internal("game-sprites/background.png"));
+        highScoreFont = new BitmapFont(Gdx.files.internal("fonts/font.fnt"));
         stage = new Stage(game.viewport);
         table = new Table();
         Gdx.input.setInputProcessor(stage);
@@ -93,6 +98,11 @@ public class MainMenuScreen implements Screen {
         table.add(vibrateCheck).align(Align.right).colspan(1);
         table.row();
         stage.addActor(table);
+
+        String str = "Best Score : " + SpaceSurfer.highScore.getInteger("high_score");
+        layout = new GlyphLayout();
+        layout.setText(highScoreFont, str);
+
     }
 
     @Override
@@ -110,6 +120,9 @@ public class MainMenuScreen implements Screen {
         batch.draw(logo,
                 SpaceSurfer.WIDTH / 2 - logo.getWidth() / 2,
                 SpaceSurfer.HEIGHT - 200);
+        highScoreFont.draw(batch, layout,
+                SpaceSurfer.WIDTH / 2 - layout.width / 2,
+                100);
         batch.end();
 
         stage.act(delta);
